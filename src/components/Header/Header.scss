@@ -1,0 +1,29 @@
+/* Header.scss */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    background-color: #007bff;
+    padding: 10px;
+    color: #fff;
+  }
+  
+  .cart-icon,
+  .favorites-icon {
+    display: flex;
+    align-items: center;
+  }
+  
+  .cart-count,
+  .favorites-count {
+    margin-left: 5px;
+  }
+  
+  .cart-icon span,
+  .favorites-icon span {
+    font-size: 24px;
+    margin-right: 5px;
+    cursor: pointer;
+  }
+  
