@@ -1,17 +1,37 @@
 [
-    {
-      "name": "Product 1",
-      "price": 19.99,
-      "imagePath": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
-      "sku": "1234567890",
-      "color": "Blue"
-    },
-    {
-      "name": "Product 2",
-      "price": 29.99,
-      "imagePath": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80",
-      "sku": "0987654321",
-      "color": "Red"
-    }
-  ]
-  
+  {
+    "name": "Product 1",
+    "price": 19.99,
+    "imagePath": "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80",
+    "sku": "1234567890",
+    "color": "Blue"
+  },
+  {
+    "name": "Product 2",
+    "price": 29.99,
+    "imagePath": "https://images.unsplash.com/photo-1572635196237-14b3f281503f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=580&q=80",
+    "sku": "0987654321",
+    "color": "Red"
+  },
+  {
+    "name": "Product 3",
+    "price": 39.99,
+    "imagePath": "https://images.unsplash.com/photo-1560343090-f0409e92791a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8Nnx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+    "sku": "7894563210",
+    "color": "Green"
+  },
+  {
+    "name": "Product 4",
+    "price": 49.99,
+    "imagePath": "https://images.unsplash.com/photo-1503602642458-232111445657?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8OHx8cHJvZHVjdHxlbnwwfHwwfHx8MA%3D%3D&auto=format&fit=crop&w=800&q=60",
+    "sku": "6543210987",
+    "color": "Yellow"
+  },
+  {
+    "name": "Product 5",
+    "price": 59.99,
+    "imagePath": "https://images.unsplash.com/photo-1485955900006-10f4d324d411?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MTJ8fHByb2R1Y3R8ZW58MHx8MHx8fDA%3D&auto=format&fit=crop&w=800&q=60",
+    "sku": "5432109876",
+    "color": "Pink"
+  }
+]

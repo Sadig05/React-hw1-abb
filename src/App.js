@@ -1,71 +1,64 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
+import { Routes, Route, useLocation } from "react-router-dom"; // Import Routes, Route, and useLocation
 import axios from "axios";
 import ProductCard from "./components/ProductCard/ProductCard";
 import Header from "./components/Header/Header";
 import "./App.css";
+import { Cart, Favorites } from './Pages'
+import Menu from "./components/Menu/Menu";
+import useLocalStorage from "./utils/useLocalStorage";
 
-class App extends React.Component {
-  state = {
-    products: [],
-    cartItems: [],
-    favorites: [],
-  };
 
-  componentDidMount() {
+function App() {
+  const [products, setProducts] = useState([]);
+  const [cartItems, setCartItems] = useLocalStorage("cartItems"); 
+  const [favorites, setFavorites] = useLocalStorage("favorites"); 
+
+  useEffect(() => {
     axios.get("/products.json").then((response) => {
-      this.setState({ products: response.data });
+      setProducts(response.data);
     });
+  }, []);
 
-    const cartItemsFromStorage = localStorage.getItem("cartItems");
-    if (cartItemsFromStorage) {
-      this.setState({ cartItems: JSON.parse(cartItemsFromStorage) });
-    }
-
-    const favoritesFromStorage = localStorage.getItem("favorites");
-    if (favoritesFromStorage) {
-      this.setState({ favorites: JSON.parse(favoritesFromStorage) });
-    }
-  }
-
-  handleAddToCart = (sku) => {
-    const updatedCart = [...this.state.cartItems, sku];
-    this.setState({ cartItems: updatedCart });
+  const handleAddToCart = (sku) => {
+    const updatedCart = [...cartItems, sku];
+    setCartItems(updatedCart);
     localStorage.setItem("cartItems", JSON.stringify(updatedCart));
   };
 
-  handleAddToFavorites = (sku) => {
-    const { favorites } = this.state;
+  const handleAddToFavorites = (sku) => {
     const updatedFavorites = favorites.includes(sku)
       ? favorites.filter((item) => item !== sku)
       : [...favorites, sku];
-    this.setState({ favorites: updatedFavorites });
+    setFavorites(updatedFavorites);
     localStorage.setItem("favorites", JSON.stringify(updatedFavorites));
   };
 
-  render() {
-    const { products, cartItems, favorites } = this.state;
-
-    return (
-      <div className="App">
+  return (
+    <div className="App">
+      <Menu />
       <Header cartCount={cartItems.length} favoritesCount={favorites.length} />
-      <div className="product-list">
-        {products.map((product) => (
-          <ProductCard
-            key={product.sku}
-            name={product.name}
-            price={product.price}
-            imagePath={product.imagePath}
-            sku={product.sku}
-            color={product.color}
-            onAddToCart={this.handleAddToCart}
-            onAddToFavorites={this.handleAddToFavorites}
-            isFavorite={favorites.includes(product.sku)}
-          />
-        ))}
-      </div>
+      <Routes>
+        <Route path="/" element={<div className="product-list" >
+          {products.map((product) => (
+            <ProductCard
+              key={product.sku}
+              name={product.name}
+              price={product.price}
+              imagePath={product.imagePath}
+              sku={product.sku}
+              color={product.color}
+              onAddToCart={handleAddToCart}
+              onAddToFavorites={handleAddToFavorites}
+              isFavorite={favorites.includes(product.sku)}
+            />
+          ))}
+        </div>} />
+        <Route path="cart" element={<Cart />} />
+        <Route path="favorites" element={<Favorites />} />
+      </Routes>
     </div>
-    );
-  }
+  );
 }
 
 export default App;

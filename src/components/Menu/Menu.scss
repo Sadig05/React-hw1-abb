@@ -1,0 +1,32 @@
+/* Menu.scss */
+
+.menu {
+    ul {
+      list-style: none;
+      padding: 0;
+      display: flex;
+      justify-content: center;
+      background-color: #2196F3; /* Blue color */
+    }
+  
+    li {
+      margin: 0 20px;
+    }
+  
+    .link {
+      text-decoration: none;
+      color: #fff; /* White color */
+      font-weight: bold;
+      transition: color 0.3s ease;
+  
+      &:hover {
+        color: #BBDEFB; /* Light blue color on hover */
+      }
+    }
+  
+    .active-link {
+      color: #BBDEFB; /* Light blue color for active link */
+      text-decoration: underline;
+    }
+  }
+  

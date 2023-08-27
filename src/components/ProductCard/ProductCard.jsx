@@ -1,74 +1,97 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import './ProductCard.scss';
 import Button from '../Button/Button';
 import Modal from '../Modal/Modal'; // Import the Modal component from homework1
 
-class ProductCard extends React.Component {
-  static propTypes = {
-    name: PropTypes.string.isRequired,
-    price: PropTypes.number.isRequired,
-    imagePath: PropTypes.string.isRequired,
-    sku: PropTypes.string.isRequired,
-    color: PropTypes.string.isRequired,
-    onAddToCart: PropTypes.func.isRequired,
-    onAddToFavorites: PropTypes.func.isRequired,
-    isFavorite: PropTypes.bool,
+function ProductCard({
+  name,
+  price,
+  imagePath,
+  sku,
+  color,
+  onAddToCart,
+  onAddToFavorites,
+  onRemoveFromCart,
+  isFavorite,
+  inCart,
+}) {
+  const [showModal, setShowModal] = useState(false);
+
+  const handleAddToCart = () => {
+    onAddToCart(sku);
+    setShowModal(true); // Show the modal when adding to cart
   };
 
-  static defaultProps = {
-    isFavorite: false,
+  const handleModalClose = () => {
+    setShowModal(false); // Close the modal
   };
 
-  state = {
-    showModal: false, // State to control the display of the modal
+  const handleAddToFavorites = () => {
+    onAddToFavorites(sku);
   };
 
-  handleAddToCart = () => {
-    this.props.onAddToCart(this.props.sku);
-    this.setState({ showModal: true }); // Show the modal when adding to cart
-  };
-
-  handleModalClose = () => {
-    this.setState({ showModal: false }); // Close the modal
-  };
-
-  handleAddToFavorites = () => {
-    this.props.onAddToFavorites(this.props.sku);
-  };
-
-  render() {
-    const { name, price, imagePath, color, isFavorite } = this.props;
-    const { showModal } = this.state;
-
-    return (
-      <div className="product-card">
-        <img className="product-image" src={imagePath} alt={name} />
-        <h3 className="product-name">{name}</h3>
-        <p className="product-price">${price}</p>
-        <p className="product-color">Color: {color}</p>
+  return (
+    <div className="product-card">
+      <img className="product-image" src={imagePath} alt={name} />
+      <h3 className="product-name">{name}</h3>
+      <p className="product-price">${price}</p>
+      <p className="product-color">Color: {color}</p>
+    { !inCart ? (<><button
+        className="add-to-cart-button"
+        // backgroundColor="green" 
+        onClick={handleAddToCart}
+      >
+        Add to cart
+      </button>
+        <span
+        className={`favorite-icon ${isFavorite ? 'favorite' : ''}`}
+        onClick={handleAddToFavorites}
+      >
+        ★
+      </span>
+      </>
+      ) : (
         <button
-          className="add-to-cart-button"
-          // backgroundColor="green" 
-          onClick={this.handleAddToCart}
-        >
-          Add to cart
-        </button>
-        <span className={`favorite-icon ${isFavorite ? 'favorite' : ''}`} onClick={this.handleAddToFavorites}>
-          ★
-        </span>
-        {showModal && ( 
-          <Modal
-            header="Confirmation"
-            closeButton={true}
-            onClose={this.handleModalClose}
-            text={`You have added ${name} to the cart.`}
-            actions={<button  className="add-to-cart-button" onClick={this.handleModalClose}>OK</button>}
-          />
-        )}
-      </div>
-    );
-  }
+        className="add-to-cart-button"
+        onClick={onRemoveFromCart}
+      >
+        &#10005;
+      </button>
+      ) }
+    
+      {showModal && (
+        <Modal
+          header="Confirmation"
+          closeButton={true}
+          onClose={handleModalClose}
+          text={`You have added ${name} to the cart.`}
+          actions={
+            <button className="add-to-cart-button" onClick={handleModalClose}>
+              OK
+            </button>
+          }
+        />
+      )}
+    </div>
+  );
 }
+
+// ProductCard.propTypes = {
+//   name: PropTypes.string.isRequired,
+//   price: PropTypes.number.isRequired,
+//   imagePath: PropTypes.string.isRequired,
+//   sku: PropTypes.string.isRequired,
+//   color: PropTypes.string.isRequired,
+//   onAddToCart: PropTypes.func.isRequired,
+//   onAddToFavorites: PropTypes.func.isRequired,
+//   isFavorite: PropTypes.bool,
+//   inCart: PropTypes.bool,
+
+// };
+
+ProductCard.defaultProps = {
+  isFavorite: false,
+};
 
 export default ProductCard;
